@@ -1,0 +1,390 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Create Project {% endblock title %}
+
+{% block stylesheets %}
+
+<style>
+    .progress-row {
+        display: flex;
+        justify-content: space-around;
+        background-color: white;
+    }
+
+    .progress-row__organization {
+        display: flex;
+        width: 33%;
+        justify-content: space-between;
+        align-items: center;
+        background-image: linear-gradient(to right bottom, #48abf7, #48abf7);
+        clip-path: polygon(0 0, 95% 0, 100% 50%, 95% 100%, 0 100%);
+        margin-right: -55px;
+        margin-left: -30px;
+        color: white;
+    }
+
+    .progress-row__project {
+        display: flex;
+        width: 33%;
+        justify-content: space-between;
+        align-items: center;
+        background-image: linear-gradient(to right bottom, #e7e7e7, #f7f7f7);
+        clip-path: polygon(0 0, 95% 0, 100% 50%, 95% 100%, 0 100%, 5% 50%);
+        margin-right: -55px;
+    }
+
+    .progress-row_subscription {
+        display: flex;
+        width: 33%;
+        justify-content: space-between;
+        align-items: center;
+        background-image: linear-gradient(to right bottom, #e7e7e7, #f7f7f7);
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 5% 50%);
+        margin-right: -30px;
+    }
+
+    .progress-text {
+        font-size: 20px;
+        padding: 10px;
+        margin-left: 30px;
+    }
+
+    .fa-cst {
+        color: white;
+    }
+
+    .icon-cst {
+        font-size: 50px;
+        margin-top: -14px;
+        margin-bottom: -14px;
+        color: white;
+    }
+
+    .section-courses {
+        padding: 20px;
+    }
+
+    .card-cst {
+        perspective: 150rem;
+        -moz-perspective: 150rem;
+        position: relative;
+        height: 45rem;
+    }
+
+    .card__side {
+        height: 45rem;
+        transition: all .8s ease;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        backface-visibility: hidden;
+        border-radius: 0rem;
+        overflow: hidden;
+        box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+    }
+
+    .card__side--front {
+        background-color: #fff;
+    }
+
+    .card__side--back {
+        transform: rotateY(180deg);
+    }
+
+    .card__side--back-1 {
+        background-image: linear-gradient(to right, #ffb900, #ff7730);
+    }
+
+    .card__side--back-2 {
+        background-image: linear-gradient(to right, #8e9efc, #1c3eff);
+    }
+
+    .card__side--back-3 {
+        background-image: linear-gradient(to right, #55c57a, #28b485);
+    }
+
+    .card-cst:hover .card__side--front {
+        transform: rotateY(-180deg);
+    }
+
+    .card-cst:hover .card__side--back {
+        transform: rotateY(0);
+    }
+
+    .card__picture {
+        background-size: cover;
+        height: 23rem;
+        background-blend-mode: screen;
+        clip-path: ellipse(80% 70% at 50% 30%);
+    }
+
+    .card__picture--1 {
+        background-image: linear-gradient(to right, #ffb900, #ff7730);
+    }
+
+    .card__picture--2 {
+        background-image: linear-gradient(to right, #8e9efc, #1c3eff);
+    }
+
+    .card__picture--3 {
+        background-image: linear-gradient(to right, #55c57a, #28b485);
+    }
+
+    .card__heading {
+        font-size: 2.8rem;
+        font-weight: 300;
+        text-align: center;
+        text-transform: uppercase;
+        color: #fff;
+        position: absolute;
+        top: 12rem;
+        right: 2rem;
+        width: 75%;
+    }
+
+    .card__heading-span {
+        border-radius: 5rem;
+        padding: 1rem 1.5rem;
+    }
+
+    .card__details {
+        padding: 3rem;
+    }
+
+    .card__details ul {
+        list-style: none;
+        width: 70%;
+        margin: 0 auto;
+    }
+
+    .card__details ul li {
+        text-align: center;
+        font-size: 1.5rem;
+        padding: 1rem;
+    }
+
+    .card__details ul li:not(:last-child) {
+        border-bottom: 1px solid #dbdbdb;
+    }
+
+    .card__cta {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        text-align: center;
+    }
+
+    .card__price-box {
+        text-align: center;
+        color: #fff;
+        margin-bottom: 8rem;
+    }
+
+    .card__price-only {
+        font-size: 1.4rem;
+        text-transform: uppercase;
+    }
+
+    .card__price-value {
+        font-size: 6rem;
+        font-weight: 100;
+        margin-bottom: 5rem;
+    }
+
+    .btn--white {
+        background-color: #fff;
+        color: #777;
+    }
+</style>
+
+{% endblock stylesheets %}
+
+{% block content %}
+<div class="page-inner">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Create Project</h4>
+                </div>
+                <div class="card-body p-0">
+                    <div class="progress-row">
+                        <div class="progress-row__organization">
+                            <span class="progress-text">Organization</span>
+                            <!-- <i class="flaticon-right-arrow icon-cst"></i> -->
+                        </div>
+                        <div class="progress-row__project">
+                            <span class="progress-text">Project</span>
+                            <!-- <i class="flaticon-right-arrow icon-cst"></i> -->
+                        </div>
+                        <div class="progress-row_subscription">
+                            <span class="progress-text">Subscription</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="org_form">
+                    {% include 'organization_form.html' %}
+                </div>
+                <div id="proj_form" style="display: none;">
+                    {% include 'project_form.html' %}
+                </div>
+                <div id="sub_form" style="display: none;">
+                    <section class="section-courses" id="section-courses">
+                        <div class="row">
+                            {% for plan in plans %}
+                            <div class="col-4">
+                                <div class="card-cst">
+                                    <div class="card__side card__side--front">
+                                        <div class="card__picture card__picture--{{ plan.id }}">
+                                            &nbsp;
+                                        </div>
+                                        <h4 class="card__heading">
+                                            <span class="card__heading-span card__heading-span--{{ plan.id }}">
+                                                {{ plan.plan}}
+                                            </span>
+                                        </h4>
+                                        <div class="card__details">
+                                            <ul>
+                                                <li>Users - {{ plan.number_of_stakeholders }}</li>
+                                                <li>Validity - {{ plan.validity }} Months</li>
+                                                <!-- <li>5 star rated</li> -->
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                    <div class="card__side card__side--back card__side--back-{{ plan.id }}">
+                                        <div class="card__cta">
+                                            <div class="card__price-box">
+                                                <p class="card__price-only">
+                                                    Only
+                                                </p>
+                                                <p class="card__price-value">
+                                                    &#8377; {{ plan.price }}
+                                                </p>
+                                                <a href="#popup" class="btn btn--white"
+                                                    onclick="subscribePlan({{ plan.id }})">Subscribe Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input id="user_id" value="{{ request.user.id }}" style="display: none;">
+<input id="org_id" value="{{ org.id }}" style="display: none;">
+{% endblock content %}
+
+{% block javascripts %}
+<script>
+    let organization_id;
+
+    function showProjectForm() {
+        $("#org_form").css("display", "none")
+        $("#proj_form").css("display", "block")
+        $(".progress-row__organization").css("background-image", "linear-gradient(to right bottom, #e7e7e7, #f7f7f7)")
+        $(".progress-row__organization").css("color", "black")
+        $(".progress-row__project").css("background-image", "linear-gradient(to right bottom, #48abf7, #48abf7)")
+        $(".progress-row__project").css("color", "white")
+        var payload = {
+            "user": $("#user_id").val(),
+            "org_name": $("#name").val(),
+            "comm_address1": $("#comm_address1").val(),
+            "comm_address2": $("#comm_address2").val(),
+            "comm_country": $("#comm_country").val(),
+            "comm_state": $("#comm_state").val(),
+            "comm_city": $("#comm_city").val(),
+            "comm_phone": $("#comm_phone").val(),
+            "comm_email": $("#comm_email").val(),
+            "comm_gstin": $("#comm_gstin").val(),
+            "bill_address1": $("#bill_address1").val(),
+            "bill_address2": $("#bill_address2").val(),
+            "bill_country": $("#bill_country").val(),
+            "bill_state": $("#bill_state").val(),
+            "bill_city": $("#bill_city").val(),
+            "bill_phone": $("#bill_phone").val(),
+            "bill_email": $("#bill_email").val(),
+            "bill_gstin": $("#bill_gstin").val(),
+        }
+
+        $.ajax({
+            url: "/create_org",
+            type: "POST",
+            dataType: 'json',
+            headers: { "X-CSRFToken": $.cookie('csrftoken') },
+            data: payload,
+            success: function (data) {
+                organization_id = data.id
+            }
+        })
+    }
+
+    let project_id
+
+    function showSubscriptionForm() {
+        $("#proj_form").css("display", "none")
+        $("#sub_form").css("display", "block")
+        $(".progress-row__project").css("background-image", "linear-gradient(to right bottom, #e7e7e7, #f7f7f7)")
+        $(".progress-row__project").css("color", "black")
+        $(".progress-row_subscription").css("background-image", "linear-gradient(to right bottom, #48abf7, #48abf7)")
+        $(".progress-row_subscription").css("color", "white")
+
+        let final_id
+
+        if (organization_id) {
+            final_id = organization_id
+        }
+
+        else {
+            final_id = $("#org_id").val()
+        }
+
+        var payload = {
+            "user": $("#user_id").val(),
+            "organization": final_id,
+            "title": $("#title").val(),
+            "description": $("#description").val(),
+            "start_date": $("#start").val(),
+            "end_date": $("#end").val(),
+            "duration": "",
+            "subscribed_plan": "",
+            "anykey": "anyvalue",
+        }
+        $.ajax({
+            url: "/create_proj",
+            type: "POST",
+            dataType: 'json',
+            headers: { "X-CSRFToken": $.cookie('csrftoken') },
+            data: payload,
+            success: function (data) {
+                project_id = data.id
+            }
+        })
+    }
+
+    function subscribePlan(id) {
+        const payload = {
+            "subscribed_plan": id
+        }
+
+        $.ajax({
+            url: "/subscribe/" + project_id,
+            type: "PUT",
+            dataType: 'json',
+            headers: { "X-CSRFToken": $.cookie('csrftoken') },
+            data: payload,
+            success: function (data) {
+                window.location.replace("http://localhost:8000/addcard/")
+            }
+        })
+    }
+</script>
+{% endblock javascripts %}

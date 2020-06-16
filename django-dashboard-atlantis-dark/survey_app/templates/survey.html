@@ -1,0 +1,72 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Survey {% endblock title %}
+
+{% block stylesheets %}
+<link href="https://cdn.jsdelivr.net/npm/handsontable-pro@3.0.0/dist/handsontable.full.min.css" rel="stylesheet"
+    media="screen">
+<style>
+    .wtHolder {
+        width: 100% !important;
+    }
+
+    .htCore {
+        width: 100% !important;
+    }
+</style>
+{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="card-header">
+    <h4 class="card-title">Survey</h4>
+</div>
+<div class="" style="margin:20px">
+    <!-- <table>
+        {% for i in datas %}
+        <tr>
+            <td>{{ i }}</td>
+        </tr>
+        {% endfor %}
+    </table> -->
+
+    <div id="example"></div>
+</div>
+
+
+{% endblock content %}
+
+{% block javascripts %}
+
+<script src="/static/assets/js/demo.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/handsontable-pro@3.0.0/dist/handsontable.full.min.js"></script>
+
+<script>
+    $.ajax({
+        url: "/get_data",
+        type: "GET",
+        dataType: "json",
+        success: function (data) {
+            any_list = []
+            data.map(item => {
+                if (typeof item[2] == "number") {
+                    item[2] = ((item[2] * 100).toFixed(2)).toString() + "%"
+                    // item[2] = (item[2] * 100).toString() + "%"
+                    any_list.push(item)
+                }
+            })
+            var container = document.getElementById('example');
+            var hot = new Handsontable(container, {
+                data: data,
+                rowHeaders: false,
+                colHeaders: true,
+                filters: false,
+                dropdownMenu: false
+            });
+        },
+    });
+
+</script>
+
+{% endblock javascripts %}
